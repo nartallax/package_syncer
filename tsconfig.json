@@ -3,7 +3,7 @@
         "target": "es2018",
         "entryModule": "ts/main.ts",
         "entryFunction": "main",
-        "outFile": "target/main.js",
+        "outFile": "target/package_syncer.js",
     },
 
     "include": [

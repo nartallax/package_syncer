@@ -1,15 +1,20 @@
 {
   "name": "@nartallax/package_syncer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tool to keep contents of your node_modules in sync with package.json",
   "main": "package_syncer.js",
   "author": "Nartallax",
   "license": "0BSD",
-  "dependencies": {
-    "shell-quote": "^1.7.3"
-  },
+  "bugs": "https://github.com/nartallax/package_syncer/issues",
+  "repository": "github:nartallax/package_syncer",
   "scripts":{
     "pub": "./scripts/prepare_release.sh && cd target && npm publish --access public"
+  },
+  "bin": {
+    "package_syncer": "package_syncer.js"
+  },
+  "dependencies": {
+    "shell-quote": "^1.7.3"
   },
   "devDependencies": {
     "@nartallax/imploder": "^1.1.29",

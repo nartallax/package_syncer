@@ -10,7 +10,7 @@ It also has watch mode, for those of us who love continuously-running developmen
 
 ## Install and run
 
-	npm install @nartallax/package_syncer
+	npm install --save-dev @nartallax/package_syncer
 	./node_modules/.bin/package_syncer --help
 
 ## Options

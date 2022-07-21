@@ -1,0 +1,24 @@
+{
+  "name": "@nartallax/package_syncer",
+  "version": "1.0.0",
+  "description": "A tool to keep contents of your node_modules in sync with package.json",
+  "main": "package_syncer.js",
+  "author": "Nartallax",
+  "license": "0BSD",
+  "dependencies": {
+    "shell-quote": "^1.7.3"
+  },
+  "scripts":{
+    "pub": "./scripts/prepare_release.sh && cd target && npm publish --access public"
+  },
+  "devDependencies": {
+    "@nartallax/imploder": "^1.1.29",
+    "eslint": "^8.20.0",
+    "typescript": "^4.7.4",
+
+    "@types/node": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.30.7",
+    "@typescript-eslint/parser": "^5.30.7",
+    "@types/shell-quote": "^1.7.1"
+  }
+}

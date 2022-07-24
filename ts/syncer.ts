@@ -25,6 +25,13 @@ export class PackageSyncer {
 		})
 	}
 
+	async backupCurrentFiles(): Promise<void> {
+		await Promise.all(this.config.sourceFiles.map(async sourceFilePath => {
+			const backupFilePath = this.getBackupFilePath(sourceFilePath)
+			await Fs.copyFile(sourceFilePath, backupFilePath)
+		}))
+	}
+
 	private completeWith(err: Error | null, result: boolean): void {
 		const waiters = this.completionWaiters
 		this.completionWaiters = []
@@ -112,20 +119,13 @@ export class PackageSyncer {
 		}))
 	}
 
-	private async makeBackups(): Promise<void> {
-		await Promise.all(this.config.sourceFiles.map(async sourceFilePath => {
-			const backupFilePath = this.getBackupFilePath(sourceFilePath)
-			await Fs.copyFile(sourceFilePath, backupFilePath)
-		}))
-	}
-
 	private async doSync(): Promise<void> {
 		// when command is `npm ci`, it will remove node_modules with our backups, which is ok
 		// but the command may be different, like `npm install`
 		// so it's better to remove backups by hand
 		await this.rmBackups()
 		await runCommand(this.config.syncCommand)
-		await this.makeBackups()
+		await this.backupCurrentFiles()
 	}
 
 }

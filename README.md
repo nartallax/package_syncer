@@ -39,3 +39,8 @@ Intended use-case is to be included as part of scripts that start your compiler,
 
 Path to `node_modules` directory.  
 Right now it's not used for anything beside backup files storage, but who knowns.  
+
+### --remember
+
+Copy source files into backup locations before start.  
+That way, you're saying "this node_modules are currently in sync with package.json, no need to re-sync". So, this option should be supplied only after `npm install` or something like that.  

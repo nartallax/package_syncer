@@ -25,6 +25,10 @@ const cli = new CLI({
 		watch: CLI.bool({
 			keys: ["-w", "--watch"],
 			definition: "Run continuously, watching source files and syncing as they change"
+		}),
+		remember: CLI.bool({
+			keys: ["-r", "--remember"],
+			definition: "Save current version of watched files as acting ones. Should be used after `npm install` or when you are absolutely certain that node_modules folder is in 100% correct state."
 		})
 	}
 })

@@ -6,6 +6,10 @@ export async function mainInternal(): Promise<void> {
 	const args = getCliArgs()
 	const syncer = new PackageSyncer(args)
 
+	if(args.remember){
+		await syncer.backupCurrentFiles()
+	}
+
 	if(args.watch){
 		args.sourceFiles.forEach(fileName => watchFileChanges(fileName, wrapDumpErrors(async() => {
 			await syncer.run()
@@ -13,7 +17,7 @@ export async function mainInternal(): Promise<void> {
 	}
 
 	const hadSync = await syncer.run()
-	if(!hadSync){
+	if(!hadSync && !args.remember){
 		console.error("No changes detected in package files.")
 	}
 }

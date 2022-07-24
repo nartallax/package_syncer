@@ -1,6 +1,6 @@
 {
   "name": "@nartallax/package_syncer",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A tool to keep contents of your node_modules in sync with package.json",
   "main": "package_syncer.js",
   "author": "Nartallax",

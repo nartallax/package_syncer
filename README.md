@@ -10,8 +10,43 @@ It also has watch mode, for those of us who love continuously-running developmen
 
 ## Install and run
 
-	npm install --save-dev @nartallax/package_syncer
-	./node_modules/.bin/package_syncer --help
+```bash
+npm install --save-dev @nartallax/package_syncer
+./node_modules/.bin/package_syncer --help
+```
+
+## Example
+
+That's how I use this tool in one of my projects:  
+
+```bash
+
+# ...usual stuff, like cd'ing to proper folder and set -e ...
+
+if [ ! -d "./node_modules" ] ; then
+	# it's probably freshly cloned repo! let's just install packages
+    npm install
+	# then we'll remember current versions of package.json and package-lock.json as correct
+	# so this time no immediate re-install of packages will occur
+	# also note that we are starting in watchmode
+    ./node_modules/.bin/package_syncer --remember --watch &
+else
+	# we already have some packages installed! let's check them
+    ./node_modules/.bin/package_syncer
+	# we do first check separately and then launch tool again, skipping initial check
+	# that's because if we have some changes in packages,
+	# we want them to be installed before we actually proceed further
+    ./node_modules/.bin/package_syncer --skip-initial-check --watch &
+fi
+
+# at this point we have packages synced and syncer running in watch mode
+
+# ...here we launch other stuff, like development webserver, compiler serivce and so on ...
+
+# wait at the end of the script will help to terminate all the launched tools at once
+wait
+
+```
 
 ## Options
 
@@ -44,3 +79,7 @@ Right now it's not used for anything beside backup files storage, but who knowns
 
 Copy source files into backup locations before start.  
 That way, you're saying "this node_modules are currently in sync with package.json, no need to re-sync". So, this option should be supplied only after `npm install` or something like that.  
+
+### --skip-initial-check
+
+Don't check files initially. Tool will still check files in watch mode if --watch is passed. Initial check is always skipped if --remember passed.  

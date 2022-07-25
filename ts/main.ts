@@ -16,9 +16,11 @@ export async function mainInternal(): Promise<void> {
 		})))
 	}
 
-	const hadSync = await syncer.run()
-	if(!hadSync && !args.remember){
-		console.error("No changes detected in package files.")
+	if(!args.remember && !args.skipInitialCheck){
+		const hadSync = await syncer.run()
+		if(!hadSync){
+			console.error("No changes detected in package files.")
+		}
 	}
 }
 

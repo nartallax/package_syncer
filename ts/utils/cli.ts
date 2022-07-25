@@ -191,10 +191,10 @@ export class CLI<T> {
 
 		const keyPart = (argName: string & keyof(T)) => {
 			const def = this.params.definition[argName]
-			return def.keys.join(", ") + " " + def.type
+			return def.keys.join(", ") + " (" + def.type + ")"
 		}
 
-		const maxKeyLength: number = argNames.map(argName => keyPart(argName).length).reduce((a, b) => Math.max(a, b), 0)
+		const maxKeyLength: number = argNames.map(argName => keyPart(argName).length).reduce((a, b) => Math.max(a, b), 0) + 1
 
 		argNames.forEach(argName => {
 			const def = this.params.definition[argName]
@@ -206,7 +206,10 @@ export class CLI<T> {
 				line += ": " + def.definition
 			}
 			if(def.allowedValues){
-				line += " Allowed values: " + def.allowedValues.join(", ") + "."
+				if(def.definition){
+					line += ";"
+				}
+				line += " allowed values: " + def.allowedValues.join(", ")
 			}
 			helpLines.push(line)
 		})

@@ -20,23 +20,22 @@ npm install --save-dev @nartallax/package_syncer
 That's how I use this tool in one of my projects:  
 
 ```bash
-
-# ...usual stuff, like cd'ing to proper folder and set -e ...
+# ...usual stuff, like shebang, cd'ing to proper folder and set -e ...
 
 if [ ! -d "./node_modules" ] ; then
 	# it's probably freshly cloned repo! let's just install packages
-    npm install
+	npm install
 	# then we'll remember current versions of package.json and package-lock.json as correct
 	# so this time no immediate re-install of packages will occur
 	# also note that we are starting in watchmode
-    ./node_modules/.bin/package_syncer --remember --watch &
+	./node_modules/.bin/package_syncer --remember --watch &
 else
 	# we already have some packages installed! let's check them
-    ./node_modules/.bin/package_syncer
+	./node_modules/.bin/package_syncer
 	# we do first check separately and then launch tool again, skipping initial check
 	# that's because if we have some changes in packages,
 	# we want them to be installed before we actually proceed further
-    ./node_modules/.bin/package_syncer --skip-initial-check --watch &
+	./node_modules/.bin/package_syncer --skip-initial-check --watch &
 fi
 
 # at this point we have packages synced and syncer running in watch mode
